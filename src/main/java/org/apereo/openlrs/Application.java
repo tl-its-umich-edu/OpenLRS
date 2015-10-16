@@ -22,6 +22,11 @@ import lti.oauth.OAuthFilter;
 
 import org.apereo.openlrs.controllers.xapi.XAPIRequestValidationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -45,13 +50,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Configuration
 @EnableAutoConfiguration(exclude = {ElasticsearchAutoConfiguration.class,ElasticsearchDataAutoConfiguration.class})
 @ComponentScan(basePackages={"org.apereo.openlrs","lti"})
-public class Application {
+public class Application extends SpringBootServletInitializer {
 	
 	@Autowired private OpenLRSAuthenticationFilter openLRSAuthenticationFilter;
 	@Autowired private XAPIRequestValidationFilter xapiRequestValidationFilter;
 	@Autowired private CORSFilter corsFilter;
 	@Autowired private OAuthFilter oAuthFilter;
 	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Application.class);
+	}
+   
 	public static void main(final String[] args) {
 		SpringApplication springApplication = new SpringApplication(Application.class);
 		springApplication.addListeners(new ApplicationPidFileWriter("openlrs.pid"));

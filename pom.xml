@@ -5,12 +5,15 @@
     <groupId>org.apereo</groupId>
     <artifactId>openlrs</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <parent>
 	    <groupId>org.springframework.boot</groupId>
     	<artifactId>spring-boot-starter-parent</artifactId>
-    	<version>1.2.0.M2</version>
+<!--
+    	<version>1.2.0.M2</version> 
+ -->
+    	<version>1.2.6.RELEASE</version>
 	</parent>
 
     <name>Apereo OpenLRS Project</name>
@@ -36,6 +39,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
